@@ -3,7 +3,12 @@ import React from "react";
 import RestoreIcon from "@mui/icons-material/Restore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import {
   DashboardOutlined,
   DriveEta,
@@ -25,13 +30,15 @@ function BottomNav() {
   const handleChange = (event: any, newValue: string) => {
     navigate(newValue);
   };
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <BottomNavigation
+      showLabels={!isSmallScreen}
       value={location.pathname}
       onChange={handleChange}
-      showLabels
-      sx={{ position: "fixed", bottom: 0, left: 0, right: 0 , padding:"10px"}}
+      sx={{ position: "fixed", bottom: 0, left: 0, right: 0, padding: "10px" }}
     >
       <BottomNavigationAction
         label="DASHBOARD"

@@ -11,7 +11,7 @@ import Lights from "./Lights/Lights";
 import Display from "./Display/Display";
 import Services from "./Services/Services";
 import Software from "./Software/Software";
-import Sidebar from "../../Navbar/Sidebar";
+import Sidebar from "../../SideBar/Sidebar";
 
 function Settings() {
   return (

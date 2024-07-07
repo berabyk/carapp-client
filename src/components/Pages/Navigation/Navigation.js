@@ -49,12 +49,11 @@ const Navigation = () => {
         const nextPoint = pathCoordinates[currentIndex];
         traveledPath.push(nextPoint);
 
-        // Güncellenen gri polyline'ı yeniden ekle
         grayPolyline.setLatLngs(traveledPath);
 
         carMarker.setLatLng(nextPoint);
         map.flyTo(nextPoint, 18, { duration: 1 });
-        setTimeout(moveCar, 2000); // Araba hareket hızını ayarlamak için bu değeri değiştirebilirsiniz
+        setTimeout(moveCar, 2000);
       }
     };
 
@@ -68,11 +67,3 @@ const Navigation = () => {
 };
 
 export default Navigation;
-
-// function Navigation() {
-//   return (
-//     <div>Navigation</div>
-//   )
-// }
-
-// export default Navigation;
