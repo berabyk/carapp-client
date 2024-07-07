@@ -1,10 +1,16 @@
 import { Grid, Slider, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomToggleButton from "../../../CustomToggleButton/CustomToggleButton";
 import { GiFogLight } from "react-icons/gi";
 import CarPic from "../../../CarPic/CarPic";
+import {
+  ChangeLightByCarId,
+  GetLightsByCarId,
+} from "../../../../services/HttpService";
 
 function Lights() {
+  const carId = 2;
+
   const customHeadlightButtons = [
     {
       value: "off",
@@ -43,18 +49,56 @@ function Lights() {
     },
   ];
 
-  const [defaultLightValue, setDefaultLightValue] = useState<string>("auto")
-  const [defaultFogValue, setDefaultFogValue] = useState<string>("frontfog")
-  function changeLights(newLight: string){
-    console.log(newLight);
+  const [defaultLightValue, setDefaultLightValue] = useState<string>("auto");
+  const [defaultFogValue, setDefaultFogValue] = useState<string>("frontfog");
+  const [defaultAngle, setDefaultAngle] = useState<number>(11);
+
+  //GET Lights
+  const getLightsByCarId = () => {
+    GetLightsByCarId("light", carId)
+      .then((res: Response) => res.json())
+      .then((res: any) => {
+        setDefaultLightValue(res.headLights);
+        setDefaultFogValue(res.fogLights);
+        setDefaultAngle(res.angle);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getLightsByCarId();
+  }, []);
+
+  //PUT Lights
+  const saveLight = (selectedType: string, selectedValue: string) => {
+    console.log(carId);
+    ChangeLightByCarId("Light", carId, {
+      [`${selectedType}`]: selectedValue,
+    })
+      .then((res) => res.json())
+      .catch((err) => console.log(err));
+  };
+
+  function changeLights(newLight: string) {
+    saveLight("headLights", newLight);
     setDefaultLightValue(newLight);
-    
   }
 
-  function changeFog(newFog: string){
-    console.log(newFog);
-    setDefaultFogValue(newFog); 
+  function changeFog(newFog: string) {
+    saveLight("fogLights", newFog);
+
+    setDefaultFogValue(newFog);
   }
+
+  const handleChangeCommitted = (
+    event: Event | React.SyntheticEvent,
+    value: number | number[]
+  ) => {
+    saveLight("angle", String(value));
+  };
 
   return (
     <Grid container spacing={2}>
@@ -70,6 +114,7 @@ function Lights() {
             </Typography>
 
             <CustomToggleButton
+              key={`headlightButton-${defaultLightValue}`}
               buttons={customHeadlightButtons}
               defaultValue={defaultLightValue}
               changeLights={changeLights}
@@ -82,6 +127,7 @@ function Lights() {
             </Typography>
 
             <CustomToggleButton
+              key={`foglightButton-${defaultFogValue}`}
               buttons={customFogButtons}
               defaultValue={defaultFogValue}
               changeLights={changeFog}
@@ -94,9 +140,11 @@ function Lights() {
             </Typography>
 
             <Slider
+              onChangeCommitted={handleChangeCommitted}
               min={0}
               max={60}
-              defaultValue={11}
+              key={`slider-${defaultAngle}`}
+              defaultValue={defaultAngle}
               aria-label="Default"
               valueLabelDisplay="auto"
               sx={{ maxWidth: "500px", color: "#2e319b" }}
@@ -104,9 +152,11 @@ function Lights() {
           </Stack>
         </Stack>
       </Grid>
-      <Grid item md={6} display={{xs: "none", md:"block"}}>
-        <CarPic defaultLightValue = {defaultLightValue}
-        defaultFogValue={defaultFogValue}></CarPic>
+      <Grid item md={6} display={{ xs: "none", md: "block" }}>
+        <CarPic
+          defaultLightValue={defaultLightValue}
+          defaultFogValue={defaultFogValue}
+        ></CarPic>
       </Grid>
     </Grid>
   );

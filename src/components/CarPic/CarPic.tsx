@@ -2,8 +2,8 @@ import { Box } from "@mui/material";
 import React, { useState } from "react";
 
 interface CarPicProps {
-  defaultLightValue: string;
-  defaultFogValue: string;
+  defaultLightValue?: string;
+  defaultFogValue?: string;
 }
 
 function CarPic(props: CarPicProps) {
