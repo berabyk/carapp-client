@@ -35,7 +35,7 @@ function BottomNav() {
     >
       <BottomNavigationAction
         label="DASHBOARD"
-        value="/dashboard"
+        value="/"
         icon={<DashboardOutlined />}
         sx={{ "& .MuiBottomNavigationAction-label": { marginTop: 1 } }}
       />

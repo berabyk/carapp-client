@@ -28,6 +28,9 @@ import Software from "./components/Pages/Settings/Software/Software";
 import Air from "./components/Pages/Settings/Air/Air";
 import BottomNav from "./components/BottomNav/BottomNav";
 import NotificationCenter from "./components/NotificationCenter/NotificationCenter";
+import QuickControl from "./components/Pages/QuickControl/QuickControl";
+import Phone from "./components/Pages/Phone/Phone";
+import Media from "./components/Pages/Media/Media";
 
 
 function App() {
@@ -58,6 +61,11 @@ function App() {
             </Box>
             <Routes>
               <Route path="/" element={<Dashboard />}></Route>
+              
+              <Route path="quickcontrol" element={<QuickControl />}></Route>
+              <Route path="navigation" element={<Navigation />}></Route>
+              <Route path="phone" element={<Phone />}></Route>
+              <Route path="media" element={<Media />}></Route>
               <Route path="settings" element={<Settings />}>
                 <Route path="" element={<Car />}></Route>
                 <Route path="driving" element={<Driving />}></Route>
@@ -68,7 +76,6 @@ function App() {
                 <Route path="services" element={<Services />}></Route>
                 <Route path="software" element={<Software />}></Route>
               </Route>
-              <Route path="navigation" element={<Navigation />}></Route>
             </Routes>
           <BottomNav/>
           </BrowserRouter>

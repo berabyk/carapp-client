@@ -3,12 +3,13 @@
 }
 
 .car-pic-container {
-  position: relative; 
+  position: relative;
 }
 
-.car-pic-container::before, .car-pic-container::after {
+.car-pic-container::before,
+.car-pic-container::after {
   content: '';
-  position: absolute; 
+  position: absolute;
   transform: translateX(-50%);
   pointer-events: none;
 }
@@ -18,7 +19,7 @@
   left: 50%;
   width: 50%;
   height: 20%;
-  background: radial-gradient(circle, rgba(255,255,255,0.5) 10%, rgba(255,255,255,0) 80%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 10%, rgba(255, 255, 255, 0) 80%);
 }
 
 .parking::before {
@@ -26,7 +27,7 @@
   left: 50%;
   width: 50%;
   height: 20%;
-  background: radial-gradient(circle, rgba(255 255 255 / 28%) 0%, rgba(255,255,255,0) 70%);
+  background: radial-gradient(circle, rgba(255 255 255 / 28%) 0%, rgba(255, 255, 255, 0) 70%);
 }
 
 /* .back-fog::after {
@@ -71,7 +72,8 @@
 .backfog::before {
   width: 50%;
   height: 20%;
-  background: radial-gradient(circle, rgba(255, 0, 0, 0.8) 0%, rgba(255, 0, 0, 0) 80%); /* Kırmızı bir radial gradient */
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.8) 0%, rgba(255, 0, 0, 0) 80%);
+  /* Kırmızı bir radial gradient */
 
   top: 85%;
   left: 25%;
@@ -81,7 +83,8 @@
 .backfog::after {
   width: 50%;
   height: 20%;
-  background: radial-gradient(circle, rgba(255, 0, 0, 0.8) 0%, rgba(255, 0, 0, 0) 80%); /* Kırmızı bir radial gradient */
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.8) 0%, rgba(255, 0, 0, 0) 80%);
+  /* Kırmızı bir radial gradient */
 
   top: 85%;
   right: -25%;
